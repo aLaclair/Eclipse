@@ -1,0 +1,13 @@
+body {
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    color: white;
+    overflow: hidden;
+}
+section {
+    height: 100vh
+}
+.navbar {
+    position: fixed;
+    top: 0;
+}
