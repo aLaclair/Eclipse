@@ -22,80 +22,104 @@
     <div class="container">
       <div class="navbar">
         <div class="logo">
-          <img src="#" />
+          <img src="./assets/images/earth.png" width="75px" height="75px">
           <p>Eclipse</p>
         </div>
         <div class="nav">
           <ul class="links">
             <li><a href="#destination">Destinations</a></li>
             <li><a href="#learn">Discover</a></li>
-            <li><a href="#APOD">Inspiration</a></li>
+            <li id="last"><a href="#APOD">Inspiration</a></li>
           </ul>
         </div>
       </div>
       <section id="destination">
-        <h1>Book your next<br>interplanetary flight</h1>
-        <h2>Where would you like<br>to travel today?</h2>
-        <div class="planetcontainer">
-          <div class="moon">
-            <img src="#" />
-            <p>Moon</p>
-          </div>
-          <div class="mars">
-            <img src="#" />
-            <p>Mars</p>
-          </div>
-          <div class="venus">
-            <img src="#" />
-            <p>Venus</p>
-          </div>
-          <div class="jupiter">
-            <img src="#" />
-            <p>Jupiter</p>
-          </div>
-          <div class="saturn">
-            <img src="#" />
-            <p>Saturn</p>
-          </div>
-          <div class="uranus">
-            <img src="#" />
-            <p>Uranus</p>
+        <div class="content">
+          <h2>Where would you like<br />to travel today?</h2>
+          <div class="planetcontainer">
+            <div class="moon button">
+              <img src="./assets/images/moon.png" width="50px" height="50px">
+              <p>Moon</p>
+            </div>
+            <div class="mars button">
+              <img src="./assets/images/mars.png" width="50px" height="50px">
+              <p>Mars</p>
+            </div>
+            <div class="venus button">
+              <img src="./assets/images/venus.svg" width="50px" height="50px"/>
+              <p>Venus</p>
+            </div>
+            <div class="jupiter button">
+              <img src="./assets/images/jupiter.png" width="50px" height="50px"/>
+              <p>Jupiter</p>
+            </div>
+            <div class="saturn button">
+              <img src="./assets/images/saturn.svg" width="70px" height="50px"/>
+              <p>Saturn</p>
+            </div>
+            <div class="neptune button">
+              <img src="./assets/images/Neptune_sketch.svg" width="50px" height="50px"/>
+              <p>Neptune</p>
+            </div>
           </div>
         </div>
       </section>
       <section id="learn">
-        <h1>Choose a destination</h1>
-        <div class="planetcontainer">
-          <div class="moon">
-            <img src="#" />
-            <p>Moon</p>
-          </div>
-          <div class="mars">
-            <img src="#" />
-            <p>Mars</p>
-          </div>
-          <div class="venus">
-            <img src="#" />
-            <p>Venus</p>
-          </div>
-          <div class="jupiter">
-            <img src="#" />
-            <p>Jupiter</p>
-          </div>
-          <div class="saturn">
-            <img src="#" />
-            <p>Saturn</p>
-          </div>
-          <div class="uranus">
-            <img src="#" />
-            <p>Uranus</p>
+        <div class="content">
+          <h2>Learn More</h2>
+          <div class="planetcontainer">
+            <div class="moon button2">
+                <img src="./assets/images/moon.png" width="50px" height="50px">
+                <p>Moon</p>
+              </div>
+              <div class="mars button2">
+                <img src="./assets/images/mars.png" width="50px" height="50px">
+                <p>Mars</p>
+              </div>
+              <div class="venus button2">
+                <img src="./assets/images/venus.svg" width="50px" height="50px"/>
+                <p>Venus</p>
+              </div>
+              <div class="jupiter button2">
+                <img src="./assets/images/jupiter.png" width="50px" height="50px"/>
+                <p>Jupiter</p>
+              </div>
+              <div class="saturn button2">
+                <img src="./assets/images/saturn.svg" width="70px" height="50px"/>
+                <p>Saturn</p>
+              </div>
+              <div class="neptune button2">
+                <img src="./assets/images/Neptune_sketch.svg" width="50px" height="50px"/>
+                <p>Neptune</p>
+            </div>
           </div>
         </div>
       </section>
       <section id="APOD">
-        <p>X Æ A-12 Musk</p>
+        <div class="content">
+            <div class="card quote">
+                <div class="card-header">
+                  Quote
+                </div>
+                <div class="card-body">
+                  <blockquote class="blockquote mb-0">
+                    <p>Thats one small step for man, one giant leap for mankind.</p>
+                    <footer class="blockquote-footer"> <cite title="Source Title">Neil Armstrong</cite></footer>
+                  </blockquote>
+                </div>
+              </div>
+            <div class="card myCard" style="width: 20rem;">
+                <img src="..." class="card-img-top">
+                <div class="card-body">
+                  <h5 class="card-title"></h5>
+                  <p class="card-text">From Nasa's APOD API</p>
+                </div>
+              </div>
+        </div>
       </section>
     </div>
+
+    <footer>X Æ A-12 Musk</footer>
     <script src="./assets/script/script.js"></script>
   </body>
 </html>
