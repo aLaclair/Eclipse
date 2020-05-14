@@ -7,6 +7,16 @@ $(document).ready(function () {
         $("#destination").empty()
         // let planetText = $("<d")
         renderbutton()
+        let queryURL = 'https://pds-imaging.jpl.nasa.gov/solr/pds_archives/search?target='+ planet + '&pds.emission_angle=[0%20to%2010]'
+        $.ajax({
+            url: queryURL,
+            method: 'GET'
+        })
+        .then(function(response) {
+            let distance = response.response.docs[2].SOLAR_DISTANCE
+            let pdistance = $('<div>').text(distance)
+            $('.card').prepend(pdistance)  // DOES NOT WORK YET
+        })
     })
     $('.button2').on('click', function () {
         let planet = $(this).text().trim()
