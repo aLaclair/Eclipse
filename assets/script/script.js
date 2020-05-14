@@ -5,9 +5,8 @@ $(document).ready(function () {
     $('.button').on('click', function () {
         let planet = $(this).text().trim()
         $("#destination").empty()
-        let planetcard = $("<div>").attr("class", "card")
-        planetcard.css("width", "25rem")
-        // let planetimage = $("<img>").attr("src", "")
+        // let planetText = $("<d")
+        renderbutton()
     })
     $('.button2').on('click', function () {
         let planet = $(this).text().trim()
@@ -24,9 +23,15 @@ $(document).ready(function () {
         })
 
     function renderbutton() {
+        let shipDiv = $("<div>").attr("class", "allShipButton")
         for (let i = 0; i < ships.length; i++) {
             let newButton = $("<button>").attr("class", "shipbutton")
             newButton.text(ships[i].Name)
+            shipDiv.append(newButton)
         }
+        let planetcard = $("<div>").attr("class", "card")
+        planetcard.css("width", "25rem")
+        planetcard.append(shipDiv)
+        $("#destination").append(planetcard)
     }
 })
