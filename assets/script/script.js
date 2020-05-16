@@ -19,6 +19,7 @@ $(document).ready(function () {
         OrbitDistance: "384,400 km",
         OrbitPeriod: "27.3 days",
         SurfaceTemperature: "-233 to 123 °C",
+        Distance: 238900
       },
       facts: [
         "The dark side of the moon is a myth.",
@@ -34,6 +35,7 @@ $(document).ready(function () {
         Moons: "2 (Phobos & Deimos)",
         OrbitDistance: "687 days (1.9 years)",
         SurfaceTemperature: "-87 to -5 °C",
+        Distance: 104280000
       },
       facts: [
         "Mars is home to the tallest mountain in the solar system.",
@@ -49,6 +51,7 @@ $(document).ready(function () {
         Moons: "None",
         OrbitDistance: "108,209,475 km (0.73 AU)",
         SurfaceTemperature: "462 °C",
+        Distance: 74402987,
       },
       facts: [
         "Venus does not have any moons or rings.",
@@ -66,6 +69,7 @@ $(document).ready(function () {
         Moons: "79 (Io, Europa, Ganymede & Callisto)",
         OrbitDistance: "778,340,821 km (5.20 AU)",
         SurfaceTemperature: "-108°C",
+        Distance: 447648234,
       },
       facts: [
         "Jupiter has the shortest day of all the planets.",
@@ -81,6 +85,7 @@ $(document).ready(function () {
         Moons: "82 (Titan, Enceladus, Iapetus & Rhea)",
         OrbitDistance: "1,426,666,422 km (9.58 AU)",
         SurfaceTemperature: "-139°C",
+        Distance: 900377530,
       },
       facts: [
         "Saturn is the flattest planet.",
@@ -96,6 +101,7 @@ $(document).ready(function () {
         Moons: "14 (Triton)",
         OrbitDistance: "4,498,396,441 km (30.10 AU)",
         SurfaceTemperature: "-201°C",
+        Distance: 200780567000,
       },
       facts: [
         "Neptune is the most distant planet from the Sun.",
@@ -106,24 +112,44 @@ $(document).ready(function () {
       ],
     },
   };
+    let planetcard = $("<div>").attr("class", "card");
+    planetcard.css("width", "25rem");
+   
+    
 
   //buttons for traveling
   $(".button").on("click", function () {
     let planet = $(this).text().trim();
+    let distance = details[planet].profile.Distance
     $("#destination").empty();
-    // let planetText = $("<d")
     renderbutton();
+    function renderbutton() {
+        let shipDiv = $("<div>").attr("class", "allShipButton");
+        for (let i = 0; i < ships.length; i++) {
+          let newButton = $("<button>").attr("class", "shipbutton");
+          newButton.text(ships[i].Name);
+          shipDiv.append(newButton);
+        }
+        planetcard.append(shipDiv);
+        $("#destination").append(planetcard);
+        $(".shipbutton").hover(function (){
+            let ship = $(this).text()
+            console.log(ship)
+           // for (let i = 0; i < ships[])           
+            let speed = ships.find(o => o.Name === ship).Speed
+            timeTravel(distance, speed);
+         })
+      }
+   
+    
+    planetcard.prepend("Distance: " + distance + " miles")
     let queryURL =
-      "https://pds-imaging.jpl.nasa.gov/solr/pds_archives/search?target=" +
-      planet +
-      "&pds.emission_angle=[0%20to%2010]";
+    "https://api.spacexdata.com/v3/launchpads"
     $.ajax({
       url: queryURL,
       method: "GET",
     }).then(function (response) {
-      let distance = response.response.docs[2].SOLAR_DISTANCE;
-      let pdistance = $("<div>").text(distance);
-      $(".card").prepend(pdistance); // DOES NOT WORK YET
+        console.log(response)
     });
   });
 
@@ -148,18 +174,7 @@ $(document).ready(function () {
     $(".card-title").text(response.title);
   });
 
-  function renderbutton() {
-    let shipDiv = $("<div>").attr("class", "allShipButton");
-    for (let i = 0; i < ships.length; i++) {
-      let newButton = $("<button>").attr("class", "shipbutton");
-      newButton.text(ships[i].Name);
-      shipDiv.append(newButton);
-    }
-    let planetcard = $("<div>").attr("class", "card");
-    planetcard.css("width", "25rem");
-    planetcard.append(shipDiv);
-    $("#destination").append(planetcard);
-  }
+ 
   //function for planet/destination information when planet is clicked
   function learnMoreButtons(result) {
     console.log(result);
@@ -183,4 +198,12 @@ $(document).ready(function () {
     planetInfoCard.append(destinationDiv);
     $("#learn").append(planetInfoCard);
   }
+
+  let timeTravel = function(num1,num2){
+   let timeTraveled = num1 / num2
+   console.log(num1, num2)
+   console.log(timeTraveled)
+   return timeTraveled
+  } 
+  
 });
