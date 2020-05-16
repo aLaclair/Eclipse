@@ -11,7 +11,7 @@ $(document).ready(function () {
 //information about planets found in the discover tab
   let details = {
     Moon: {
-      image: "assets/images/moon-des.png",
+      image: "assets/images/moon.png",
       profile: {
         Diameter: "3,475 km",
         Mass: "7.35 × 10^22 kg (0.01 Earths)",
@@ -28,7 +28,7 @@ $(document).ready(function () {
       ],
     },
     Mars: {
-      image: "assets/images/mars-des.jpg",
+      image: "assets/images/mars.png",
       profile: {
         Diameter: "6,792 km",
         Mass: "6.39 × 10^23 kg(0.11 Earths)",
@@ -44,7 +44,7 @@ $(document).ready(function () {
       ],
     },
     Venus: {
-      image: "assets/images/venus-des.png",
+      image: "assets/images/venus.svg",
       profile: {
         Diameter: "12,104 km",
         Mass: "4.87 × 10^24 kg (0.82 Earths)",
@@ -62,7 +62,7 @@ $(document).ready(function () {
       ],
     },
     Jupiter: {
-      image: "assets/images/jupiter-des.png",
+      image: "assets/images/jupiter.png",
       profile: {
         Diameter: "142,984 km",
         Mass: "1.90 × 10^27 kg (318 Earths)",
@@ -78,7 +78,7 @@ $(document).ready(function () {
       ],
     },
     Saturn: {
-      image: "assets/images/saturn-des.png",
+      image: "assets/images/saturn.svg",
       profile: {
         Diameter: "120,536 km",
         Mass: "5.68 × 10^26 kg (95 Earths)",
@@ -94,7 +94,7 @@ $(document).ready(function () {
       ],
     },
     Neptune: {
-      image: "assets/images/neptune-des.png",
+      image: "assets/images/Neptune_sketch.svg",
       profile: {
         Diameter: "49,528 km",
         Mass: "1.02 × 10^26 kg (17 Earths)",
@@ -114,6 +114,8 @@ $(document).ready(function () {
   };
     let planetcard = $("<div>").attr("class", "card");
     planetcard.css("width", "25rem");
+    let timediv = $('<div>').attr('class', 'timediv')
+    planetcard.append(timediv)
    
     
 
@@ -134,33 +136,48 @@ $(document).ready(function () {
         $("#destination").append(planetcard);
         $(".shipbutton").hover(function (){
             let ship = $(this).text()
-            console.log(ship)
            // for (let i = 0; i < ships[])           
             let speed = ships.find(o => o.Name === ship).Speed
-            timeTravel(distance, speed);
+            let time = timeTravel(distance, speed);
+            timediv.text('Estimated Travel Time: ' + time + ' Hours')
+            $('.shipbutton').click(function(){
+              $("#destination").empty();
+              let allset = $('<div>').attr('class', 'card').text("All set! You're travelling to " + planet + " on the " + ship + " !")
+              $('#destination').append(allset)
+            })
          })
+        
       }
    
-    
+    let locationdiv = $('<div>').attr('class', 'location')
+    let question = $('<p>').text('Where are you located?')
+    let east = $('<button>').attr('value', '5').attr('class', 'coast').text('East Coast')
+    let west = $('<button>').attr('value', '4').attr('class', 'coast').text('West Coast')
+    locationdiv.append(question).append(east).append(west)
+    planetcard.prepend(locationdiv)
     planetcard.prepend("Distance: " + distance + " miles")
-    let queryURL =
+    $('.coast').on('click', function() {
+      let choice = $(this).val().trim()
+      $('.location').empty()
+      console.log(choice)
+      let queryURL =
     "https://api.spacexdata.com/v3/launchpads"
     $.ajax({
       url: queryURL,
       method: "GET",
     }).then(function (response) {
-        console.log(response)
+      console.log(response)
+      let location = $('<p>').attr('class', 'locationtext').text(response[choice].location.name)
+      $('.location').append(location)
+      
     });
+    })
   });
 
   //buttons for learn more section
-  $(".button2").on("click", function () {
-    console.log("here");
+  $(".button2").hover(function () {
     let planet = $(this).text().trim();
-    console.log(planet);
     let result = details[planet];
-
-    $("#learn").empty();
     learnMoreButtons(result);
   });
 
@@ -169,7 +186,6 @@ $(document).ready(function () {
       "https://api.nasa.gov/planetary/apod?api_key=cVxqhuu8gexD4U5kFQCInoUyj3zRBgN4b8Qsh4qo",
     method: "GET",
   }).then(function (response) {
-    console.log(response);
     $(".card img").attr("src", response.url);
     $(".card-title").text(response.title);
   });
@@ -177,13 +193,9 @@ $(document).ready(function () {
  
   //function for planet/destination information when planet is clicked
   function learnMoreButtons(result) {
-    console.log(result);
-    let image = $("<img>").attr("src", result.image);
     let destinationDiv = $("<div>").attr("class", "destinationInfo");
-    destinationDiv.append(image);
     //for in loop for the object 'profile'
     for (let property in result.profile) {
-      console.log(result.profile[property]);
       let pprop = $("<p>").text(`${property}: ${result.profile[property]}`);
       destinationDiv.append(pprop);
     }
@@ -196,14 +208,15 @@ $(document).ready(function () {
     let planetInfoCard = $("<div>").attr("class", "card");
     planetInfoCard.css("width", "25rem");
     planetInfoCard.append(destinationDiv);
-    $("#learn").append(planetInfoCard);
+    $(".planetinfo").html(planetInfoCard);
   }
 
   let timeTravel = function(num1,num2){
-   let timeTraveled = num1 / num2
-   console.log(num1, num2)
-   console.log(timeTraveled)
-   return timeTraveled
+   let timeTraveled = (num1 / num2)
+   if (timeTraveled < 0) {
+     return "Instant"
+   }
+   return timeTraveled.toFixed(2)
   } 
   
 });
