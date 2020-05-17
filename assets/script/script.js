@@ -8,7 +8,7 @@ $(document).ready(function () {
     { Name: "Tardis", Speed: -1 },
   ];
 
-//information about planets found in the discover tab
+  //information about planets found in the discover tab
   let details = {
     Moon: {
       image: "assets/images/moon.png",
@@ -112,12 +112,12 @@ $(document).ready(function () {
       ],
     },
   };
-    let planetcard = $("<div>").attr("class", "card");
-    planetcard.css("width", "25rem");
-    let timediv = $('<div>').attr('class', 'timediv')
-    planetcard.append(timediv)
-   
-    
+  let planetcard = $("<div>").attr("class", "card");
+  planetcard.css("width", "25rem");
+  let timediv = $('<div>').attr('class', 'timediv')
+  planetcard.append(timediv)
+
+
 
   //buttons for traveling
   $(".button").on("click", function () {
@@ -126,29 +126,29 @@ $(document).ready(function () {
     $("#destination").empty();
     renderbutton();
     function renderbutton() {
-        let shipDiv = $("<div>").attr("class", "allShipButton");
-        for (let i = 0; i < ships.length; i++) {
-          let newButton = $("<button>").attr("class", "shipbutton");
-          newButton.text(ships[i].Name);
-          shipDiv.append(newButton);
-        }
-        planetcard.append(shipDiv);
-        $("#destination").append(planetcard);
-        $(".shipbutton").hover(function (){
-            let ship = $(this).text()
-           // for (let i = 0; i < ships[])           
-            let speed = ships.find(o => o.Name === ship).Speed
-            let time = timeTravel(distance, speed);
-            timediv.text('Estimated Travel Time: ' + time + ' Hours')
-            $('.shipbutton').click(function(){
-              $("#destination").empty();
-              let allset = $('<div>').attr('class', 'card').text("All set! You're travelling to " + planet + " on the " + ship + " !")
-              $('#destination').append(allset)
-            })
-         })
-        
+      let shipDiv = $("<div>").attr("class", "allShipButton");
+      for (let i = 0; i < ships.length; i++) {
+        let newButton = $("<button>").attr("class", "shipbutton");
+        newButton.text(ships[i].Name);
+        shipDiv.append(newButton);
       }
-   
+      planetcard.append(shipDiv);
+      $("#destination").append(planetcard);
+      $(".shipbutton").hover(function () {
+        let ship = $(this).text()
+        // for (let i = 0; i < ships[])           
+        let speed = ships.find(o => o.Name === ship).Speed
+        let time = timeTravel(distance, speed);
+        timediv.text('Estimated Travel Time: ' + time + ' Hours')
+        $('.shipbutton').click(function () {
+          $("#destination").empty();
+          let allset = $('<div>').attr('class', 'card').text("All set! You're travelling to " + planet + " on the " + ship + " !")
+          $('#destination').append(allset)
+        })
+      })
+
+    }
+
     let locationdiv = $('<div>').attr('class', 'location')
     let question = $('<p>').text('Where are you located?')
     let east = $('<button>').attr('value', '5').attr('class', 'coast').text('East Coast')
@@ -156,21 +156,21 @@ $(document).ready(function () {
     locationdiv.append(question).append(east).append(west)
     planetcard.prepend(locationdiv)
     planetcard.prepend("Distance: " + distance + " miles")
-    $('.coast').on('click', function() {
+    $('.coast').on('click', function () {
       let choice = $(this).val().trim()
       $('.location').empty()
       console.log(choice)
       let queryURL =
-    "https://api.spacexdata.com/v3/launchpads"
-    $.ajax({
-      url: queryURL,
-      method: "GET",
-    }).then(function (response) {
-      console.log(response)
-      let location = $('<p>').attr('class', 'locationtext').text(response[choice].location.name)
-      $('.location').append(location)
-      
-    });
+        "https://api.spacexdata.com/v3/launchpads"
+      $.ajax({
+        url: queryURL,
+        method: "GET",
+      }).then(function (response) {
+        console.log(response)
+        let location = $('<p>').attr('class', 'locationtext').text(response[choice].location.name)
+        $('.location').append(location)
+
+      });
     })
   });
 
@@ -190,7 +190,7 @@ $(document).ready(function () {
     $(".card-title").text(response.title);
   });
 
- 
+
   //function for planet/destination information when planet is clicked
   function learnMoreButtons(result) {
     let destinationDiv = $("<div>").attr("class", "destinationInfo");
@@ -211,12 +211,12 @@ $(document).ready(function () {
     $(".planetinfo").html(planetInfoCard);
   }
 
-  let timeTravel = function(num1,num2){
-   let timeTraveled = (num1 / num2)
-   if (timeTraveled < 0) {
-     return "Instant"
-   }
-   return timeTraveled.toFixed(2)
-  } 
-  
+  let timeTravel = function (num1, num2) {
+    let timeTraveled = (num1 / num2)
+    if (timeTraveled < 0) {
+      return "Instant"
+    }
+    return timeTraveled.toFixed(2)
+  }
+
 });
