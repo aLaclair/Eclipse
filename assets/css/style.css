@@ -67,9 +67,11 @@ section h2 {
     color: white;
     text-decoration: none;
     padding: 20px 40px;
+    border: 2px solid rgba(211, 211, 211, 0.527);
+    border-radius: 5px;
 }
 #last {
-    border: 2px solid rgba(211, 211, 211, 0.527);
+    /* border: 2px solid rgba(211, 211, 211, 0.527); */
     border-radius: 5px;
 }
 .logo {
@@ -103,10 +105,12 @@ section h2 {
     padding: 10px;
     border-radius: 10px;
     transition: 0.3s;
+    background-color: rgba(32, 32, 32, 0.527);
 }
 .planetcontainer div p {
     padding-top: 10px;
     margin-bottom: 0px;
+    background-color: rgba(32, 32, 32, 0.527);
 }
 .moon img,.mars img,.venus img,.jupiter img,.saturn img,.neptune img {
     border-radius: 50%;
@@ -135,9 +139,12 @@ footer {
     line-height: 50px;
 }
 .links li:hover {
-    background-color: rgba(75, 75, 75, 0.527);
+    background-color: rgba(32, 32, 32, 0.527);
 }
 .planetcontainer div:hover {
     background-color: rgba(34, 34, 34, 0.938);
     cursor: pointer;
+}
+.planetinfo {
+    background-color: rgba(32, 32, 32, 0.527);
 }
