@@ -117,7 +117,7 @@ $(document).ready(function () {
     let timediv = $('<div>').attr('class', 'timediv')
     planetcard.append(timediv)
 
-
+    learnMoreButtons(details.Moon)
 
     //buttons for traveling
     $(".button").on("click", function () {
@@ -139,7 +139,7 @@ $(document).ready(function () {
                 // for (let i = 0; i < ships[])           
                 let speed = ships.find(o => o.Name === ship).Speed
                 let time = timeTravel(distance, speed);
-                timediv.text('Estimated Travel Time: ' + time + ' Hours')
+                timediv.text('Estimated Travel Time: ' + time)
                 $('.shipbutton').click(function () {
                     $("#destination").empty();
                     let allset = $('<div>').attr('class', 'card').text("All set! You're travelling to " + planet + " on the " + ship + "!")
@@ -192,8 +192,6 @@ $(document).ready(function () {
     $(".earf").click(function () {
         location.reload()
     })
-
-
     //function for planet/destination information when planet is clicked
     function learnMoreButtons(result) {
         let destinationDiv = $("<div>").attr("class", "destinationInfo");
@@ -209,7 +207,7 @@ $(document).ready(function () {
         }
         destinationDiv.append(ul);
         let planetInfoCard = $("<div>").attr("class", "card");
-        planetInfoCard.css("width", "25rem");
+        planetInfoCard.css("width", "30rem");
         planetInfoCard.append(destinationDiv);
         $(".planetinfo").html(planetInfoCard);
     }
@@ -219,7 +217,7 @@ $(document).ready(function () {
         if (timeTraveled < 0) {
             return "Instant"
         }
-        return timeTraveled.toFixed(2)
+        return timeTraveled.toFixed(2) + ' Hours'
     }
 
 });
