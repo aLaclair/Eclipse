@@ -223,7 +223,6 @@ $(document).ready(function () {
 });
 
 let validateForm = function(e){
-    console.log(e)
     let form = e.target
     let passwordField = form.querySelector('#login-form_password')
     let characters = [
