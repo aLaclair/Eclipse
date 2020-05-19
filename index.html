@@ -50,20 +50,21 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
-                <form>
+              
+              <div class="modal-body"> 
+                <form id="login-form">
                   <label for="username">Username:</label>
-                    <input class="form-input" type="text" name="username">
-                  <br>
+                    <input class="form-input" type="email" name="username" required/>
+                  <br/>
                   <label for="password">Password:</label>
-                  <input class="form-input" type="text" name="password">
-
+                  <input class="form-input" type="password" name="password" required/>
                 </form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Submit</button>
+                <button type="submit" class="btn btn-secondary" form="login-form">Submit</button>
               </div>
+            
             </div>
           </div>
         </div>
