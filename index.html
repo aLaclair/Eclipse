@@ -52,12 +52,12 @@
               </div>
               
               <div class="modal-body"> 
-                <form id="login-form">
+                <form id="login-form" onsubmit="validateForm(event)">
                   <label for="username">Username:</label>
                     <input class="form-input" type="email" name="username" required/>
                   <br/>
                   <label for="password">Password:</label>
-                  <input class="form-input" type="password" name="password" required/>
+                  <input id="login-form_password" class="form-input" type="password" name="password" required pattern="[\w!@#$%^&*()]{6,}"/>
                 </form>
               </div>
               <div class="modal-footer">

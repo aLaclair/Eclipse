@@ -221,3 +221,22 @@ $(document).ready(function () {
     }
 
 });
+
+let validateForm = function(e){
+    console.log(e)
+    let form = e.target
+    let passwordField = form.querySelector('#login-form_password')
+    let characters = [
+        '!', '@', '#', '$', '^', '(', ')'
+      ];
+    let valid = false
+    for ( let i = 0; i < characters.length; i++) {
+        if (passwordField.value.indexOf(characters[i]) >= 0) {
+            valid = true;
+            break;
+          }
+        }
+        if (!valid) {
+          e.preventDefault();
+        }
+}
