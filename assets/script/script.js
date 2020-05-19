@@ -142,7 +142,7 @@ $(document).ready(function () {
         timediv.text('Estimated Travel Time: ' + time + ' Hours')
         $('.shipbutton').click(function () {
           $("#destination").empty();
-          let allset = $('<div>').attr('class', 'card').text("All set! You're travelling to " + planet + " on the " + ship + " !")
+          let allset = $('<div>').attr('class', 'card').text("All set! You're travelling to " + planet + " on the " + ship + "!")
           $('#destination').append(allset)
         })
       })
@@ -167,7 +167,7 @@ $(document).ready(function () {
         method: "GET",
       }).then(function (response) {
         console.log(response)
-        let location = $('<p>').attr('class', 'locationtext').text(response[choice].location.name)
+        let location = $('<p>').attr('class', 'locationtext').text("Your Launchpad: " + response[choice].location.name + ', ' + response[choice].location.region)
         $('.location').append(location)
 
       });
@@ -189,6 +189,9 @@ $(document).ready(function () {
     $(".card img").attr("src", response.url);
     $(".card-title").text(response.title);
   });
+$(".earf").click(function(){
+    location.reload()
+})
 
 
   //function for planet/destination information when planet is clicked
