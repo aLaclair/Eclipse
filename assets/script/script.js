@@ -229,6 +229,8 @@ let validateForm = function(e){
         '!', '@', '#', '$', '^', '(', ')'
       ];
     let valid = false
+    if (!passwordField.value.length > 6)
+      e.preventDefault()
     for ( let i = 0; i < characters.length; i++) {
         if (passwordField.value.indexOf(characters[i]) >= 0) {
             valid = true;
