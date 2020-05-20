@@ -13,8 +13,7 @@
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
-    
+<script src="https://unpkg.com/scrollreveal"></script>
 </head>
 
 <body>
@@ -57,7 +56,7 @@
                     <input class="form-input" type="email" name="username" required/>
                   <br/>
                   <label for="password">Password:</label>
-                  <input id="login-form_password" class="form-input" type="password" name="password" required/>
+                  <input id="login-form_password" data-input-password="example"class="form-input" type="password" name="password" required/>
                 </form>
               </div>
               <div class="modal-footer">
@@ -134,17 +133,50 @@
     </section>
     <section id="APOD">
       <div class="content">
-        <div class="card quote">
-          <div class="card-header">
-            Quote
-          </div>
-          <div class="card-body">
-            <blockquote class="blockquote mb-0">
-              <p>Thats one small step for man, one giant leap for mankind.</p>
-              <footer class="blockquote-footer"> <cite title="Source Title">Neil Armstrong</cite></footer>
-            </blockquote>
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active" data-interval="7000">
+              <div class="card quote">
+                <div class="card-header">
+                  Quote
+                </div>
+                <div class="card-body">
+                  <blockquote class="blockquote mb-0">
+                    <p>Thats one small step for man, one giant leap for mankind.</p>
+                    <footer class="blockquote-footer"> <cite title="Source Title">Neil Armstrong</cite></footer>
+                  </blockquote>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item" data-interval="8000">
+              <div class="card quote">
+                <div class="card-header">
+                  Quote
+                </div>
+                <div class="card-body">
+                  <blockquote class="blockquote mb-0">
+                    <p>The Earth is the cradle of humanity, but mankind cannot stay in the cradle forever.</p>
+                    <footer class="blockquote-footer"> <cite title="Source Title">Konstantin Tsiolkovsky</cite></footer>
+                  </blockquote>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item" data-interval="9000">
+              <div class="card quote">
+                <div class="card-header">
+                  Quote
+                </div>
+                <div class="card-body">
+                  <blockquote class="blockquote mb-0">
+                    <p>Never limit yourself because of others’ limited imagination; never limit others because of your own limited imagination.</p>
+                    <footer class="blockquote-footer"> <cite title="Source Title">Mae Jemison</cite></footer>
+                  </blockquote>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+       
         <div class="card myCard" style="width: 20rem;">
           <img src="" class="card-img-top">
           <div class="card-body">
