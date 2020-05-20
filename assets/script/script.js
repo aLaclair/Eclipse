@@ -7,7 +7,12 @@ $(document).ready(function () {
         { Name: "Millennium Falcon", Speed: 100400000 },
         { Name: "Tardis", Speed: -1 },
     ];
-
+    ScrollReveal().reveal('#destination',{reset: true, viewFactor: 0.5})
+    ScrollReveal().reveal('#learn',{reset: true, viewFactor: 0.5})
+    ScrollReveal().reveal('#APOD',{reset: true, viewFactor: 0.5})
+    $('.btn').on('click', function() {
+        window.scroll(0,0)
+    })
     //information about planets found in the discover tab
     let details = {
         Moon: {
@@ -114,6 +119,10 @@ $(document).ready(function () {
     };
     let planetcard = $("<div>").attr("class", "card");
     planetcard.css("width", "25rem");
+    let error = $('<p>').attr('class', "error")
+    planetcard.append(error)
+    let pickaship = $('<p>').attr("class", "pickAShip").text("Pick a ship to travel on")
+    planetcard.append(pickaship)
     let timediv = $('<div>').attr('class', 'timediv')
     planetcard.append(timediv)
 
@@ -121,12 +130,18 @@ $(document).ready(function () {
 
     //buttons for traveling
     $(".button").on("click", function () {
+        
         let planet = $(this).text().trim();
         let distance = details[planet].profile.Distance
         $("#destination").empty();
-        renderbutton();
-        function renderbutton() {
-            let shipDiv = $("<div>").attr("class", "allShipButton");
+        let locationdiv = $('<div>').attr('class', 'location')
+        let question = $('<p>').text('Where are you located?')
+        let east = $('<button>').attr('value', '5').attr('class', 'coast').text('East Coast')
+        let west = $('<button>').attr('value', '4').attr('class', 'coast').text('West Coast')
+        locationdiv.append(question).append(east).append(west)
+        planetcard.prepend(locationdiv)
+        planetcard.prepend("Distance to " + planet + ": " + distance + " miles")
+        let shipDiv = $("<div>").attr("class", "allShipButton");
             for (let i = 0; i < ships.length; i++) {
                 let newButton = $("<button>").attr("class", "shipbutton");
                 newButton.text(ships[i].Name);
@@ -134,29 +149,11 @@ $(document).ready(function () {
             }
             planetcard.append(shipDiv);
             $("#destination").append(planetcard);
-            $(".shipbutton").hover(function () {
-                let ship = $(this).text()
-                // for (let i = 0; i < ships[])           
-                let speed = ships.find(o => o.Name === ship).Speed
-                let time = timeTravel(distance, speed);
-                timediv.text('Estimated Travel Time: ' + time)
-                $('.shipbutton').click(function () {
-                    $("#destination").empty();
-                    let allset = $('<div>').attr('class', 'card').text("All set! You're travelling to " + planet + " on the " + ship + "!")
-                    $('#destination').append(allset)
-                })
+            $('.shipbutton').click(function() {
+                $('.error').text('Please choose a location')
             })
-
-        }
-
-        let locationdiv = $('<div>').attr('class', 'location')
-        let question = $('<p>').text('Where are you located?')
-        let east = $('<button>').attr('value', '5').attr('class', 'coast').text('East Coast')
-        let west = $('<button>').attr('value', '4').attr('class', 'coast').text('West Coast')
-        locationdiv.append(question).append(east).append(west)
-        planetcard.prepend(locationdiv)
-        planetcard.prepend("Distance: " + distance + " miles")
         $('.coast').on('click', function () {
+            $('.error').empty()
             let choice = $(this).val().trim()
             $('.location').empty()
             console.log(choice)
@@ -169,9 +166,24 @@ $(document).ready(function () {
                 console.log(response)
                 let location = $('<p>').attr('class', 'locationtext').text("Your Launchpad: " + response[choice].location.name + ', ' + response[choice].location.region)
                 $('.location').append(location)
-
+            $(".shipbutton").hover(function () {
+                let ship = $(this).text()        
+                let speed = ships.find(o => o.Name === ship).Speed
+                let time = timeTravel(distance, speed);
+                timediv.text('Estimated Travel Time: ' + time)
+                $('.shipbutton').click(function () {
+                    $("#destination").empty();
+                    let allset = $('<div>').attr('class', 'card').html("<p>All set! You're travelling to " + planet + " on the " + ship + "!</p>" + 
+                    '<br>' + '<p>Head to Latitude: ' + response[choice].location.latitude + ' ' + 'Longitude: ' +response[choice].location.longitude + '</p>')
+                    $('#destination').append(allset)
+                    setTimeout(function() {
+                        window.location.reload()
+                    }, 5000)
+                })
+            })
             });
         })
+        
     });
 
     //buttons for learn more section
