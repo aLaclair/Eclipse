@@ -221,3 +221,23 @@ $(document).ready(function () {
     }
 
 });
+
+let validateForm = function(e){
+    let form = e.target
+    let passwordField = form.querySelector('#login-form_password')
+    let characters = [
+        '!', '@', '#', '$', '^', '(', ')'
+      ];
+    let valid = false
+    if (!passwordField.value.length > 6)
+      e.preventDefault()
+    for ( let i = 0; i < characters.length; i++) {
+        if (passwordField.value.indexOf(characters[i]) >= 0) {
+            valid = true;
+            break;
+          }
+        }
+        if (!valid) {
+          e.preventDefault();
+        }
+}
