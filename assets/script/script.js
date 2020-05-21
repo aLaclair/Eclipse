@@ -1,18 +1,22 @@
 $(document).ready(function () {
+  
   let ships = [
     { Name: "Space Shuttle", Speed: 17000 },
     { Name: "Falcon 9", Speed: 25000 },
     { Name: "Serenity", Speed: 400000 },
     { Name: "USS Enterprise", Speed: 500400000 },
-    { Name: "Millennium Falcon", Speed: 100400000 },
+    { Name: "Millennium Falcon", Speed: 1004000000 },
     { Name: "Tardis", Speed: -1 },
   ];
+
+  //allows relevent material to show
   ScrollReveal().reveal("#destination", { reset: true, viewFactor: 0.5 });
   ScrollReveal().reveal("#learn", { reset: true, viewFactor: 0.5 });
   ScrollReveal().reveal("#APOD", { reset: true, viewFactor: 0.5 });
   $(".btn").on("click", function () {
     window.scroll(0, 0);
   });
+
 
   //information about planets found in the discover tab
   let details = {
@@ -118,6 +122,9 @@ $(document).ready(function () {
       ],
     },
   };
+
+
+  //destinations card
   let planetcard = $("<div>").attr("class", "card");
   planetcard.css("width", "25rem");
   let error = $("<p>").attr("class", "error");
@@ -129,6 +136,7 @@ $(document).ready(function () {
   let timediv = $("<div>").attr("class", "timediv");
   planetcard.append(timediv);
 
+  //default moon info
   learnMoreButtons(details.Moon);
 
   //buttons for traveling
@@ -146,31 +154,43 @@ $(document).ready(function () {
       .attr("value", "4")
       .attr("class", "coast")
       .text("West Coast");
+
     locationdiv.append(question).append(east).append(west);
     planetcard.prepend(locationdiv);
     planetcard.prepend("Distance to " + planet + ": " + distance + " miles");
+
     let shipDiv = $("<div>").attr("class", "allShipButton");
+
+    //renders ship buttons to page 
     for (let i = 0; i < ships.length; i++) {
       let newButton = $("<button>").attr("class", "shipbutton");
       newButton.text(ships[i].Name);
       shipDiv.append(newButton);
     }
+
     planetcard.append(shipDiv);
     $("#destination").append(planetcard);
+
+    //error message for not choosing location before ship
     $(".shipbutton").click(function () {
       $(".error").text("Please choose a location");
     });
+
+    //empties error message 
     $(".coast").on("click", function () {
       $(".error").empty();
       let choice = $(this).val().trim();
       $(".location").empty();
-      console.log(choice);
+      
+
+      //spacex api for launch pads 
       let queryURL = "https://api.spacexdata.com/v3/launchpads";
+
+      
       $.ajax({
         url: queryURL,
         method: "GET",
       }).then(function (response) {
-        console.log(response);
         let location = $("<p>")
           .attr("class", "locationtext")
           .text(
@@ -263,7 +283,7 @@ $(document).ready(function () {
 let validateForm = function (e) {
   let form = e.target;
   let passwordField = form.querySelector("#login-form_password");
-  let characters = ["!", "@", "#", "$", "^", "(", ")"];
+  let characters = ["!", "@", "#", "$", "^", "(", ")", "*"];
   let valid = false;
   if (!passwordField.value.length > 6) e.preventDefault();
   for (let i = 0; i < characters.length; i++) {
