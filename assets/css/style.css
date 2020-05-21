@@ -233,3 +233,7 @@ footer {
   background-color: rgba(34, 34, 34, 0.938);
   width: 550px;
 }
+
+#email {
+  margin-right: 37px;
+}
