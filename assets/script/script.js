@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  
+
   let ships = [
     { Name: "Space Shuttle", Speed: 17000 },
     { Name: "Falcon 9", Speed: 25000 },
@@ -181,12 +181,12 @@ $(document).ready(function () {
       $(".error").empty();
       let choice = $(this).val().trim();
       $(".location").empty();
-      
+
 
       //spacex api for launch pads 
       let queryURL = "https://api.spacexdata.com/v3/launchpads";
 
-      
+      //Ajax request
       $.ajax({
         url: queryURL,
         method: "GET",
@@ -195,35 +195,41 @@ $(document).ready(function () {
           .attr("class", "locationtext")
           .text(
             "Your Launchpad: " +
-              response[choice].location.name +
-              ", " +
-              response[choice].location.region
+            response[choice].location.name +
+            ", " +
+            response[choice].location.region
           );
         $(".location").append(location);
+
+        //Shows ship speed on hover
         $(".shipbutton").hover(function () {
           let ship = $(this).text();
           let speed = ships.find((o) => o.Name === ship).Speed;
           let time = timeTravel(distance, speed);
           timediv.text("Estimated Travel Time: " + time);
+
+          //Booking message
           $(".shipbutton").click(function () {
             $("#destination").empty();
             let allset = $("<div>")
               .attr("class", "card")
               .html(
                 "<p>All set! You're travelling to " +
-                  planet +
-                  " on the " +
-                  ship +
-                  "!</p>" +
-                  "<br>" +
-                  "<p>Head to Latitude: " +
-                  response[choice].location.latitude +
-                  " " +
-                  "Longitude: " +
-                  response[choice].location.longitude +
-                  "</p>"
+                planet +
+                " on the " +
+                ship +
+                "!</p>" +
+                "<br>" +
+                "<p>Head to Latitude: " +
+                response[choice].location.latitude +
+                " " +
+                "Longitude: " +
+                response[choice].location.longitude +
+                "</p>"
               );
             $("#destination").append(allset);
+
+            //Refresh page on timeout
             setTimeout(function () {
               window.location.reload();
             }, 5000);
@@ -240,6 +246,7 @@ $(document).ready(function () {
     learnMoreButtons(result);
   });
 
+  //Second API NASA(picture a day)
   $.ajax({
     url:
       "https://api.nasa.gov/planetary/apod?api_key=cVxqhuu8gexD4U5kFQCInoUyj3zRBgN4b8Qsh4qo",
@@ -248,22 +255,29 @@ $(document).ready(function () {
     $(".card img").attr("src", response.url);
     $(".card-title").text(response.title);
   });
+
+  //Refresh page on earf click
   $(".earf").click(function () {
     location.reload();
   });
+
   //function for planet/destination information when planet is clicked
   function learnMoreButtons(result) {
     let destinationDiv = $("<div>").attr("class", "destinationInfo");
+
     //for in loop for the object 'profile'
     for (let property in result.profile) {
       let pprop = $("<p>").text(`${property}: ${result.profile[property]}`);
       destinationDiv.append(pprop);
     }
     let ul = $("<ul>");
+
+    //Planet Facts
     for (let i = 0; i < result.facts.length; i++) {
       let li = $("<li>").text(result.facts[i]);
       ul.append(li);
     }
+
     destinationDiv.append(ul);
     let planetInfoCard = $("<div>").attr("class", "card");
     planetInfoCard.css("width", "29.7rem");
@@ -271,6 +285,7 @@ $(document).ready(function () {
     $(".planetinfo").html(planetInfoCard);
   }
 
+  //Calculation for Hours traveled
   let timeTravel = function (num1, num2) {
     let timeTraveled = num1 / num2;
     if (timeTraveled < 0) {
@@ -280,12 +295,17 @@ $(document).ready(function () {
   };
 });
 
+//Login Validation
 let validateForm = function (e) {
   let form = e.target;
   let passwordField = form.querySelector("#login-form_password");
   let characters = ["!", "@", "#", "$", "^", "(", ")", "*"];
   let valid = false;
+
+  //Prevent's invalid password
   if (!passwordField.value.length > 6) e.preventDefault();
+
+  //HEY JIM IT'S A LOOP 
   for (let i = 0; i < characters.length; i++) {
     if (passwordField.value.indexOf(characters[i]) >= 0) {
       valid = true;
