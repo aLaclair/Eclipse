@@ -220,6 +220,8 @@ $(document).ready(function () {
                 ship +
                 "!</p>" +
                 "<br>" +
+                '<p>Estimated travel time: ' + time + '</p>' +
+                '<br>' +
                 "<p>Head to Latitude: " +
                 response[choice].location.latitude +
                 " " +
