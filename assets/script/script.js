@@ -155,7 +155,7 @@ $(document).ready(function () {
       .attr("class", "coast")
       .text("West Coast");
 
-    locationdiv.append(question).append(east).append(west);
+    locationdiv.append(question).append(west).append(east);
     planetcard.prepend(locationdiv);
     planetcard.prepend("Distance to " + planet + ": " + distance + " miles");
 
