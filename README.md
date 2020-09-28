@@ -39,9 +39,9 @@ Enjoy your trip and thank you for choosing Eclipse.
 * **Kaiden Munsey**
 
 ## Screenshots
-[EclipseSS1](./assets/images/Eclipse1.png)
-[EclipseSS2](./assets/images/Eclipse2.png) 
-[EclipseSS3](./assets/images/Eclipse3.png)
+<img src="./assets/images/Eclipse1.png" alt="Eclipse1SS" height="300px" width="500px">
+<img src="./assets/images/Eclipse2.png" alt="Eclipse2SS" height="300px" width="500px">
+<img src="./assets/images/Eclipse3.png" alt="Eclipse3SS" height="300px" width="500px">
 
 ## Link 
 * [Eclipse](https://alaclair.github.io/Space_Travel_App/)
