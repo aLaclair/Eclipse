@@ -38,5 +38,10 @@ Enjoy your trip and thank you for choosing Eclipse.
 * **Diana Mayhugh**
 * **Kaiden Munsey**
 
+## Screenshots
+[EclipseSS1](./assets/images/Eclipse1.png)
+[EclipseSS2](./assets/images/Eclipse2.png) 
+[EclipseSS3](./assets/images/Eclipse3.png)
+
 ## Link 
 * [Eclipse](https://alaclair.github.io/Space_Travel_App/)
